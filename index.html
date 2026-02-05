@@ -7,22 +7,18 @@
 <style>:root{
   /* Bold-but-clean palette */
   --bg: #0b1220;
-  --panel: rgba(255,255,255,.06);
-  --panel-solid: #0f172a;          /* fallback-ish */
   --ink: #e5e7eb;
   --muted: rgba(229,231,235,.72);
   --line: rgba(148,163,184,.20);
   --line-strong: rgba(148,163,184,.35);
-  --accent: #60a5fa;              /* soft blue accent */
-  --accent-2: #a78bfa;            /* subtle purple for depth */
 
   --page-pad: 16px;
-  --nav-pad-y: 10px;
-  --nav-pad-x: 14px;
 
-  --col: 256px;
-  --col-gap: 10px;
   --row-gap: 14px;
+  --col-gap: 10px;
+
+  /* Scale columns down to fit the window when needed (caps at 256px). */
+  --col: min(256px, calc((min(100vw, 980px) - (2 * var(--page-pad)) - 24px - var(--col-gap)) / 2));
 
   --radius: 14px;
   --shadow: 0 1px 0 rgba(255,255,255,.03),
@@ -41,10 +37,9 @@ body{
     radial-gradient(900px 500px at 90% 0%, rgba(167,139,250,.14), transparent 55%),
     radial-gradient(700px 500px at 50% 110%, rgba(34,211,238,.08), transparent 60%),
     var(--bg);
-  padding-bottom: 54px;
 }
 
-/* Sticky top nav: bolder */
+/* Sticky top nav */
 header{
   position: sticky;
   top: 0;
@@ -54,7 +49,7 @@ header{
   border-bottom: 1px solid var(--line);
 }
 header .wrap{
-  padding: var(--nav-pad-y) var(--nav-pad-x);
+  padding: 10px 14px;
   max-width: 980px;
   margin: 0 auto;
   display: flex;
@@ -84,15 +79,13 @@ nav.toc a:focus-visible{
   outline-offset: 2px;
 }
 
-/* Main container */
 main{
   max-width: 980px;
   margin: 0 auto;
   padding: var(--page-pad);
-  overflow-x: auto;
 }
 
-/* Sections: bold “glass card” with stronger edge */
+/* Sections */
 section{
   scroll-margin-top: 72px;
   margin-top: 18px;
@@ -102,9 +95,6 @@ section{
   box-shadow: var(--shadow);
   padding: 12px 12px 14px;
 }
-
-/* Ensure anchored sections are not hidden under sticky header */
-section { scroll-margin-top: 64px; }
 section:first-of-type{ margin-top: 12px; }
 
 h2{
@@ -124,7 +114,7 @@ h2::after{
   background: linear-gradient(90deg, rgba(96,165,250,.65), rgba(167,139,250,.35), transparent 70%);
 }
 
-/* Fixed two-column paired grid */
+/* Two-column paired grid that scales down to fit */
 .pairgrid{
   display: grid;
   grid-template-columns: var(--col) var(--col);
@@ -133,25 +123,6 @@ h2::after{
   justify-content: start;
 }
 
-/* Version 6 — horizontal scroll appears ONLY when viewport is too narrow for two 256px columns */
-.pairwrap{
-  width: 100%;
-  overflow-x: auto;        /* scrollbar only when needed */
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-
-.pairgrid{
-  min-width: calc(256px * 2 + var(--col-gap)); /* prevents column collapse */
-}
-
-.pairwrap:focus-visible{
-  outline: 2px solid rgba(96,165,250,.55);
-  outline-offset: 2px;
-}
-
-
-/* GIFs: keep framing subtle so they remain the focus */
 .gif{
   display: block;
   width: var(--col);
@@ -162,365 +133,236 @@ h2::after{
   box-shadow: 0 6px 18px rgba(0,0,0,.35);
 }
 
-/* Jump link */
-.jump{
-  margin-top: 10px;
-}
+.jump{ margin-top: 10px; }
 .jump a{
   font-size: 12px;
   color: var(--muted);
   text-decoration: none;
 }
 .jump a:hover{ text-decoration: underline; }
-.jump a:focus-visible{
-  outline: 2px solid rgba(96,165,250,.55);
-  outline-offset: 2px;
-}
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
-}
-
-/* Hide native horizontal scrollbars in sections (we provide a sticky global bar) */
-.pairwrap{
-  overflow-x: auto;     /* still scrollable (touch/trackpad) */
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0;
-  scrollbar-width: none;           /* Firefox */
-}
-.pairwrap::-webkit-scrollbar{      /* WebKit */
-  height: 0;
-}
-
-/* Sticky bottom scrollbar (appears only when needed) */
-.hscrollbar{
-  position: sticky;
-  bottom: 0;
-  z-index: 20;
-  background: rgba(11,18,32,.78);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(148,163,184,.20);
-  padding: 10px 14px;
-  display: none; /* toggled by JS */
-}
-.hscrollbar .track{
-  max-width: 980px;
-  margin: 0 auto;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 999px;
-  border: 1px solid rgba(148,163,184,.20);
-  background: rgba(255,255,255,.06);
-}
-.hscrollbar .inner{
-  height: 12px; /* gives us a small scrollbar */
-}
-/* Slightly nicer scrollbar where supported */
-.hscrollbar .track::-webkit-scrollbar{
-  height: 10px;
-}
-.hscrollbar .track::-webkit-scrollbar-thumb{
-  background: rgba(229,231,235,.35);
-  border-radius: 999px;
-}
-.hscrollbar .track::-webkit-scrollbar-track{
-  background: rgba(255,255,255,.04);
-  border-radius: 999px;
-}
-</style>
+}</style>
 </head>
 <body id="top">
-<header>
-<div class="wrap">
-<nav class="toc" aria-label="Table of contents">
-<a href="#i">I</a>
-<a href="#you">You</a>
-<a href="#he">He</a>
-<a href="#she">She</a>
-<a href="#we">We</a>
-<a href="#they">They</a>
+<header><div class='wrap'><nav class='toc' aria-label='Table of contents'>
+<a href='#i'>I</a>
+<a href='#you'>You</a>
+<a href='#he'>He</a>
+<a href='#she'>She</a>
+<a href='#we'>We</a>
+<a href='#they'>They</a>
 </nav></div></header>
 <main>
-<section id="i">
+<section id='i'>
 <h2>I</h2>
-<div class="scrollbar-dock"><div class="pairwrap"><div class="pairgrid">
-<img class="gif" src="images/Yes_yes_I_am.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_am.gif">
-<img class="gif" src="images/No_no_Im_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_Im_not.gif">
-<img class="gif" src="images/Yes_yes_I_was.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_was.gif">
-<img class="gif" src="images/No_no_I_wasnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_wasnt.gif">
-<img class="gif" src="images/Yes_yes_I_do.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_do.gif">
-<img class="gif" src="images/No_no_I_dont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_dont.gif">
-<img class="gif" src="images/Yes_yes_I_did.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_did.gif">
-<img class="gif" src="images/No_no_I_didnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_didnt.gif">
-<img class="gif" src="images/Yes_yes_I_have.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_have.gif">
-<img class="gif" src="images/No_no_I_havent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_havent.gif">
-<img class="gif" src="images/Yes_yes_I_had.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_had.gif">
-<img class="gif" src="images/No_no_I_hadnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_hadnt.gif">
-<img class="gif" src="images/Yes_yes_I_can.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_can.gif">
-<img class="gif" src="images/No_no_I_cant.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_cant.gif">
-<img class="gif" src="images/Yes_yes_I_could.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_could.gif">
-<img class="gif" src="images/No_no_I_couldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_couldnt.gif">
-<img class="gif" src="images/Yes_yes_I_will.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_will.gif">
-<img class="gif" src="images/No_no_I_wont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_wont.gif">
-<img class="gif" src="images/Yes_yes_I_would.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_would.gif">
-<img class="gif" src="images/No_no_I_wouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_wouldnt.gif">
-<img class="gif" src="images/Yes_yes_I_shall.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_shall.gif">
-<img class="gif" src="images/No_no_I_shall_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_shall_not.gif">
-<img class="gif" src="images/Yes_yes_I_should.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_should.gif">
-<img class="gif" src="images/No_no_I_shouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_shouldnt.gif">
-<img class="gif" src="images/Yes_yes_I_must.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_must.gif">
-<img class="gif" src="images/No_no_I_mustnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_mustnt.gif">
-<img class="gif" src="images/Yes_yes_I_might.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_might.gif">
-<img class="gif" src="images/No_no_I_might_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_might_not.gif">
-<img class="gif" src="images/Yes_yes_I_may.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_I_may.gif">
-<img class="gif" src="images/No_no_I_may_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_I_may_not.gif">
-</div></div>
-<div class=\"jump\"><a href="#top">Jump to Top</a></div>
-</section>
-<section id="you">
-<h2>You</h2>
-<div class="scrollbar-dock"><div class="pairwrap"><div class="pairgrid">
-<img class="gif" src="images/Yes_yes_you_are.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_are.gif">
-<img class="gif" src="images/No_no_you_arent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_arent.gif">
-<img class="gif" src="images/Yes_yes_you_were.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_were.gif">
-<img class="gif" src="images/No_no_you_werent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_werent.gif">
-<img class="gif" src="images/Yes_yes_you_do.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_do.gif">
-<img class="gif" src="images/No_no_you_dont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_dont.gif">
-<img class="gif" src="images/Yes_yes_you_did.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_did.gif">
-<img class="gif" src="images/No_no_you_didnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_didnt.gif">
-<img class="gif" src="images/Yes_yes_you_have.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_have.gif">
-<img class="gif" src="images/No_no_you_havent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_havent.gif">
-<img class="gif" src="images/Yes_yes_you_had.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_had.gif">
-<img class="gif" src="images/No_no_you_hadnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_hadnt.gif">
-<img class="gif" src="images/Yes_yes_you_can.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_can.gif">
-<img class="gif" src="images/No_no_you_cant.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_cant.gif">
-<img class="gif" src="images/Yes_yes_you_could.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_could.gif">
-<img class="gif" src="images/No_no_you_couldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_couldnt.gif">
-<img class="gif" src="images/Yes_yes_you_will.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_will.gif">
-<img class="gif" src="images/No_no_you_wont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_wont.gif">
-<img class="gif" src="images/Yes_yes_you_would.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_would.gif">
-<img class="gif" src="images/No_no_you_wouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_wouldnt.gif">
-<img class="gif" src="images/Yes_yes_you_shall.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_shall.gif">
-<img class="gif" src="images/No_no_you_shall_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_shall_not.gif">
-<img class="gif" src="images/Yes_yes_you_should.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_should.gif">
-<img class="gif" src="images/No_no_you_shouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_shouldnt.gif">
-<img class="gif" src="images/Yes_yes_you_must.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_must.gif">
-<img class="gif" src="images/No_no_you_mustnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_mustnt.gif">
-<img class="gif" src="images/Yes_yes_you_might.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_might.gif">
-<img class="gif" src="images/No_no_you_might_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_might_not.gif">
-<img class="gif" src="images/Yes_yes_you_may.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_you_may.gif">
-<img class="gif" src="images/No_no_you_may_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_you_may_not.gif">
-</div></div>
-<div class=\"jump\"><a href="#top">Jump to Top</a></div>
-</section>
-<section id="he">
-<h2>He</h2>
-<div class="scrollbar-dock"><div class="pairwrap"><div class="pairgrid">
-<img class="gif" src="images/Yes_yes_he_is.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_is.gif">
-<img class="gif" src="images/No_no_he_isnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_isnt.gif">
-<img class="gif" src="images/Yes_yes_he_was.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_was.gif">
-<img class="gif" src="images/No_no_he_wasnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_wasnt.gif">
-<img class="gif" src="images/Yes_yes_he_does.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_does.gif">
-<img class="gif" src="images/No_no_he_doesnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_doesnt.gif">
-<img class="gif" src="images/Yes_yes_he_did.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_did.gif">
-<img class="gif" src="images/No_no_he_didnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_didnt.gif">
-<img class="gif" src="images/Yes_yes_he_has.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_has.gif">
-<img class="gif" src="images/No_no_he_hasnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_hasnt.gif">
-<img class="gif" src="images/Yes_yes_he_had.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_had.gif">
-<img class="gif" src="images/No_no_he_hadnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_hadnt.gif">
-<img class="gif" src="images/Yes_yes_he_can.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_can.gif">
-<img class="gif" src="images/No_no_he_cant.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_cant.gif">
-<img class="gif" src="images/Yes_yes_he_could.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_could.gif">
-<img class="gif" src="images/No_no_he_couldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_couldnt.gif">
-<img class="gif" src="images/Yes_yes_he_will.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_will.gif">
-<img class="gif" src="images/No_no_he_wont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_wont.gif">
-<img class="gif" src="images/Yes_yes_he_would.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_would.gif">
-<img class="gif" src="images/No_no_he_wouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_wouldnt.gif">
-<img class="gif" src="images/Yes_yes_he_should.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_should.gif">
-<img class="gif" src="images/No_no_he_shouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_shouldnt.gif">
-<img class="gif" src="images/Yes_yes_he_must.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_must.gif">
-<img class="gif" src="images/No_no_he_mustnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_mustnt.gif">
-<img class="gif" src="images/Yes_yes_he_might.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_might.gif">
-<img class="gif" src="images/No_no_he_might_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_might_not.gif">
-<img class="gif" src="images/Yes_yes_he_may.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_he_may.gif">
-<img class="gif" src="images/No_no_he_may_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_he_may_not.gif">
-</div></div>
-<div class=\"jump\"><a href="#top">Jump to Top</a></div>
-</section>
-<section id="she">
-<h2>She</h2>
-<div class="scrollbar-dock"><div class="pairwrap"><div class="pairgrid">
-<img class="gif" src="images/Yes_yes_she_is.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_is.gif">
-<img class="gif" src="images/No_no_she_isnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_isnt.gif">
-<img class="gif" src="images/Yes_yes_she_was.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_was.gif">
-<img class="gif" src="images/No_no_she_wasnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_wasnt.gif">
-<img class="gif" src="images/Yes_yes_she_does.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_does.gif">
-<img class="gif" src="images/No_no_she_doesnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_doesnt.gif">
-<img class="gif" src="images/Yes_yes_she_did.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_did.gif">
-<img class="gif" src="images/No_no_she_didnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_didnt.gif">
-<img class="gif" src="images/Yes_yes_she_has.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_has.gif">
-<img class="gif" src="images/No_no_she_hasnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_hasnt.gif">
-<img class="gif" src="images/Yes_yes_she_had.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_had.gif">
-<img class="gif" src="images/No_no_she_hadnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_hadnt.gif">
-<img class="gif" src="images/Yes_yes_she_can.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_can.gif">
-<img class="gif" src="images/No_no_she_cant.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_cant.gif">
-<img class="gif" src="images/Yes_yes_she_could.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_could.gif">
-<img class="gif" src="images/No_no_she_couldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_couldnt.gif">
-<img class="gif" src="images/Yes_yes_she_will.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_will.gif">
-<img class="gif" src="images/No_no_she_wont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_wont.gif">
-<img class="gif" src="images/Yes_yes_she_would.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_would.gif">
-<img class="gif" src="images/No_no_she_wouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_wouldnt.gif">
-<img class="gif" src="images/Yes_yes_she_should.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_should.gif">
-<img class="gif" src="images/No_no_she_shouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_shouldnt.gif">
-<img class="gif" src="images/Yes_yes_she_must.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_must.gif">
-<img class="gif" src="images/No_no_she_mustnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_mustnt.gif">
-<img class="gif" src="images/Yes_yes_she_might.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_might.gif">
-<img class="gif" src="images/No_no_she_might_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_might_not.gif">
-<img class="gif" src="images/Yes_yes_she_may.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_she_may.gif">
-<img class="gif" src="images/No_no_she_may_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_she_may_not.gif">
-</div></div>
-<div class=\"jump\"><a href="#top">Jump to Top</a></div>
-</section>
-<section id="we">
-<h2>We</h2>
-<div class="scrollbar-dock"><div class="pairwrap"><div class="pairgrid">
-<img class="gif" src="images/Yes_yes_we_are.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_are.gif">
-<img class="gif" src="images/No_no_we_arent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_arent.gif">
-<img class="gif" src="images/Yes_yes_we_were.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_were.gif">
-<img class="gif" src="images/No_no_we_werent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_werent.gif">
-<img class="gif" src="images/Yes_yes_we_do.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_do.gif">
-<img class="gif" src="images/No_no_we_dont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_dont.gif">
-<img class="gif" src="images/Yes_yes_we_did.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_did.gif">
-<img class="gif" src="images/No_no_we_didnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_didnt.gif">
-<img class="gif" src="images/Yes_yes_we_have.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_have.gif">
-<img class="gif" src="images/No_no_we_havent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_havent.gif">
-<img class="gif" src="images/Yes_yes_we_had.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_had.gif">
-<img class="gif" src="images/No_no_we_hadnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_hadnt.gif">
-<img class="gif" src="images/Yes_yes_we_can.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_can.gif">
-<img class="gif" src="images/No_no_we_cant.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_cant.gif">
-<img class="gif" src="images/Yes_yes_we_could.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_could.gif">
-<img class="gif" src="images/No_no_we_couldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_couldnt.gif">
-<img class="gif" src="images/Yes_yes_we_will.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_will.gif">
-<img class="gif" src="images/No_no_we_wont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_wont.gif">
-<img class="gif" src="images/Yes_yes_we_would.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_would.gif">
-<img class="gif" src="images/No_no_we_wouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_wouldnt.gif">
-<img class="gif" src="images/Yes_yes_we_shall.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_shall.gif">
-<img class="gif" src="images/No_no_we_shall_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_shall_not.gif">
-<img class="gif" src="images/Yes_yes_we_should.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_should.gif">
-<img class="gif" src="images/No_no_we_shouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_shouldnt.gif">
-<img class="gif" src="images/Yes_yes_we_must.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_must.gif">
-<img class="gif" src="images/No_no_we_mustnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_mustnt.gif">
-<img class="gif" src="images/Yes_yes_we_might.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_might.gif">
-<img class="gif" src="images/No_no_we_might_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_might_not.gif">
-<img class="gif" src="images/Yes_yes_we_may.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_we_may.gif">
-<img class="gif" src="images/No_no_we_may_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_we_may_not.gif">
-</div></div>
-<div class=\"jump\"><a href="#top">Jump to Top</a></div>
-</section>
-<section id="they">
-<h2>They</h2>
-<div class="scrollbar-dock"><div class="pairwrap"><div class="pairgrid">
-<img class="gif" src="images/Yes_yes_they_are.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_are.gif">
-<img class="gif" src="images/No_no_they_arent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_arent.gif">
-<img class="gif" src="images/Yes_yes_they_were.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_were.gif">
-<img class="gif" src="images/No_no_they_werent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_werent.gif">
-<img class="gif" src="images/Yes_yes_they_do.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_do.gif">
-<img class="gif" src="images/No_no_they_dont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_dont.gif">
-<img class="gif" src="images/Yes_yes_they_did.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_did.gif">
-<img class="gif" src="images/No_no_they_didnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_didnt.gif">
-<img class="gif" src="images/Yes_yes_they_have.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_have.gif">
-<img class="gif" src="images/No_no_they_havent.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_havent.gif">
-<img class="gif" src="images/Yes_yes_they_had.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_had.gif">
-<img class="gif" src="images/No_no_they_hadnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_hadnt.gif">
-<img class="gif" src="images/Yes_yes_they_can.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_can.gif">
-<img class="gif" src="images/No_no_they_cant.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_cant.gif">
-<img class="gif" src="images/Yes_yes_they_could.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_could.gif">
-<img class="gif" src="images/No_no_they_couldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_couldnt.gif">
-<img class="gif" src="images/Yes_yes_they_will.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_will.gif">
-<img class="gif" src="images/No_no_they_wont.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_wont.gif">
-<img class="gif" src="images/Yes_yes_they_would.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_would.gif">
-<img class="gif" src="images/No_no_they_wouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_wouldnt.gif">
-<img class="gif" src="images/Yes_yes_they_should.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_should.gif">
-<img class="gif" src="images/No_no_they_shouldnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_shouldnt.gif">
-<img class="gif" src="images/Yes_yes_they_must.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_must.gif">
-<img class="gif" src="images/No_no_they_mustnt.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_mustnt.gif">
-<img class="gif" src="images/Yes_yes_they_might.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_might.gif">
-<img class="gif" src="images/No_no_they_might_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_might_not.gif">
-<img class="gif" src="images/Yes_yes_they_may.gif" loading="lazy" decoding="async" width="256" height="256" alt="Yes_yes_they_may.gif">
-<img class="gif" src="images/No_no_they_may_not.gif" loading="lazy" decoding="async" width="256" height="256" alt="No_no_they_may_not.gif">
-</div></div>
-<div class=\"jump\"><a href="#top">Jump to Top</a></div>
-</section>
-</main><div class="hscrollbar" id="hscrollbar" aria-label="Horizontal scroll">
-  <div class="track" id="hscrollTrack">
-    <div class="inner" id="hscrollInner"></div>
-  </div>
+<div class='pairgrid'>
+<img class="gif" src="images/Yes_yes_I_am.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_am.gif">
+<img class="gif" src="images/No_no_Im_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_Im_not.gif">
+<img class="gif" src="images/Yes_yes_I_was.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_was.gif">
+<img class="gif" src="images/No_no_I_wasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_wasnt.gif">
+<img class="gif" src="images/Yes_yes_I_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_do.gif">
+<img class="gif" src="images/No_no_I_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_dont.gif">
+<img class="gif" src="images/Yes_yes_I_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_did.gif">
+<img class="gif" src="images/No_no_I_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_didnt.gif">
+<img class="gif" src="images/Yes_yes_I_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_have.gif">
+<img class="gif" src="images/No_no_I_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_havent.gif">
+<img class="gif" src="images/Yes_yes_I_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_had.gif">
+<img class="gif" src="images/No_no_I_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_hadnt.gif">
+<img class="gif" src="images/Yes_yes_I_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_can.gif">
+<img class="gif" src="images/No_no_I_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_cant.gif">
+<img class="gif" src="images/Yes_yes_I_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_could.gif">
+<img class="gif" src="images/No_no_I_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_couldnt.gif">
+<img class="gif" src="images/Yes_yes_I_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_will.gif">
+<img class="gif" src="images/No_no_I_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_wont.gif">
+<img class="gif" src="images/Yes_yes_I_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_would.gif">
+<img class="gif" src="images/No_no_I_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_wouldnt.gif">
+<img class="gif" src="images/Yes_yes_I_shall.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_shall.gif">
+<img class="gif" src="images/No_no_I_shall_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_shall_not.gif">
+<img class="gif" src="images/Yes_yes_I_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_should.gif">
+<img class="gif" src="images/No_no_I_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_shouldnt.gif">
+<img class="gif" src="images/Yes_yes_I_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_must.gif">
+<img class="gif" src="images/No_no_I_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_mustnt.gif">
+<img class="gif" src="images/Yes_yes_I_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_might.gif">
+<img class="gif" src="images/No_no_I_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_might_not.gif">
+<img class="gif" src="images/Yes_yes_I_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_may.gif">
+<img class="gif" src="images/No_no_I_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_may_not.gif">
 </div>
-
-<script>
-(() => {
-  const COL = 256;
-  const GAP = 10; // keep in sync with --col-gap / CSS
-  const contentWidth = (COL * 2) + GAP;
-
-  const bar = document.getElementById('hscrollbar');
-  const track = document.getElementById('hscrollTrack');
-  const inner = document.getElementById('hscrollInner');
-  const wraps = () => Array.from(document.querySelectorAll('.pairwrap'));
-
-  // Set inner width so the track's scrollbar represents the content width
-  function layout() {
-    inner.style.width = contentWidth + 'px';
-    // Show bar only if viewport can't fit both columns + padding
-    const needs = window.innerWidth < (contentWidth + 60); // small allowance for page padding
-    bar.style.display = needs ? 'block' : 'none';
-    // When bar hidden, reset scroll positions
-    if (!needs) {
-      track.scrollLeft = 0;
-      wraps().forEach(w => { w.scrollLeft = 0; });
-    }
-  }
-
-  let syncing = false;
-
-  // When user scrolls the sticky bar, scroll all section wrappers
-  track.addEventListener('scroll', () => {
-    if (syncing) return;
-    syncing = true;
-    const x = track.scrollLeft;
-    wraps().forEach(w => { w.scrollLeft = x; });
-    syncing = false;
-  }, { passive: true });
-
-  // If user scrolls any section horizontally (touchpad/touch), sync the bar
-  document.addEventListener('scroll', () => {}, { passive: true });
-  document.addEventListener('wheel', () => {}, { passive: true });
-
-  function attachWrapListeners() {
-    wraps().forEach(w => {
-      if (w.__hscrollBound) return;
-      w.__hscrollBound = true;
-      w.addEventListener('scroll', () => {
-        if (syncing) return;
-        if (bar.style.display !== 'block') return;
-        syncing = true;
-        track.scrollLeft = w.scrollLeft;
-        // keep all wraps in lockstep
-        const x = w.scrollLeft;
-        wraps().forEach(other => { if (other !== w) other.scrollLeft = x; });
-        syncing = false;
-      }, { passive: true });
-    });
-  }
-
-  const observer = new MutationObserver(() => attachWrapListeners());
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-
-  attachWrapListeners();
-  window.addEventListener('resize', layout, { passive: true });
-  layout();
-})();
-</script>
-</body></html>
+<div class='jump'><a href='#top'>Jump to Top</a></div>
+</section>
+<section id='you'>
+<h2>You</h2>
+<div class='pairgrid'>
+<img class="gif" src="images/Yes_yes_you_are.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_are.gif">
+<img class="gif" src="images/No_no_you_arent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_arent.gif">
+<img class="gif" src="images/Yes_yes_you_were.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_were.gif">
+<img class="gif" src="images/No_no_you_werent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_werent.gif">
+<img class="gif" src="images/Yes_yes_you_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_do.gif">
+<img class="gif" src="images/No_no_you_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_dont.gif">
+<img class="gif" src="images/Yes_yes_you_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_did.gif">
+<img class="gif" src="images/No_no_you_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_didnt.gif">
+<img class="gif" src="images/Yes_yes_you_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_have.gif">
+<img class="gif" src="images/No_no_you_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_havent.gif">
+<img class="gif" src="images/Yes_yes_you_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_had.gif">
+<img class="gif" src="images/No_no_you_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_hadnt.gif">
+<img class="gif" src="images/Yes_yes_you_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_can.gif">
+<img class="gif" src="images/No_no_you_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_cant.gif">
+<img class="gif" src="images/Yes_yes_you_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_could.gif">
+<img class="gif" src="images/No_no_you_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_couldnt.gif">
+<img class="gif" src="images/Yes_yes_you_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_will.gif">
+<img class="gif" src="images/No_no_you_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_wont.gif">
+<img class="gif" src="images/Yes_yes_you_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_would.gif">
+<img class="gif" src="images/No_no_you_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_wouldnt.gif">
+<img class="gif" src="images/Yes_yes_you_shall.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_shall.gif">
+<img class="gif" src="images/No_no_you_shall_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_shall_not.gif">
+<img class="gif" src="images/Yes_yes_you_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_should.gif">
+<img class="gif" src="images/No_no_you_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_shouldnt.gif">
+<img class="gif" src="images/Yes_yes_you_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_must.gif">
+<img class="gif" src="images/No_no_you_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_mustnt.gif">
+<img class="gif" src="images/Yes_yes_you_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_might.gif">
+<img class="gif" src="images/No_no_you_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_might_not.gif">
+<img class="gif" src="images/Yes_yes_you_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_may.gif">
+<img class="gif" src="images/No_no_you_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_may_not.gif">
+</div>
+<div class='jump'><a href='#top'>Jump to Top</a></div>
+</section>
+<section id='he'>
+<h2>He</h2>
+<div class='pairgrid'>
+<img class="gif" src="images/Yes_yes_he_is.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_is.gif">
+<img class="gif" src="images/No_no_he_isnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_isnt.gif">
+<img class="gif" src="images/Yes_yes_he_was.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_was.gif">
+<img class="gif" src="images/No_no_he_wasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_wasnt.gif">
+<img class="gif" src="images/Yes_yes_he_does.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_does.gif">
+<img class="gif" src="images/No_no_he_doesnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_doesnt.gif">
+<img class="gif" src="images/Yes_yes_he_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_did.gif">
+<img class="gif" src="images/No_no_he_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_didnt.gif">
+<img class="gif" src="images/Yes_yes_he_has.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_has.gif">
+<img class="gif" src="images/No_no_he_hasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_hasnt.gif">
+<img class="gif" src="images/Yes_yes_he_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_had.gif">
+<img class="gif" src="images/No_no_he_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_hadnt.gif">
+<img class="gif" src="images/Yes_yes_he_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_can.gif">
+<img class="gif" src="images/No_no_he_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_cant.gif">
+<img class="gif" src="images/Yes_yes_he_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_could.gif">
+<img class="gif" src="images/No_no_he_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_couldnt.gif">
+<img class="gif" src="images/Yes_yes_he_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_will.gif">
+<img class="gif" src="images/No_no_he_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_wont.gif">
+<img class="gif" src="images/Yes_yes_he_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_would.gif">
+<img class="gif" src="images/No_no_he_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_wouldnt.gif">
+<img class="gif" src="images/Yes_yes_he_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_should.gif">
+<img class="gif" src="images/No_no_he_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_shouldnt.gif">
+<img class="gif" src="images/Yes_yes_he_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_must.gif">
+<img class="gif" src="images/No_no_he_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_mustnt.gif">
+<img class="gif" src="images/Yes_yes_he_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_might.gif">
+<img class="gif" src="images/No_no_he_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_might_not.gif">
+<img class="gif" src="images/Yes_yes_he_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_may.gif">
+<img class="gif" src="images/No_no_he_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_may_not.gif">
+</div>
+<div class='jump'><a href='#top'>Jump to Top</a></div>
+</section>
+<section id='she'>
+<h2>She</h2>
+<div class='pairgrid'>
+<img class="gif" src="images/Yes_yes_she_is.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_is.gif">
+<img class="gif" src="images/No_no_she_isnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_isnt.gif">
+<img class="gif" src="images/Yes_yes_she_was.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_was.gif">
+<img class="gif" src="images/No_no_she_wasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_wasnt.gif">
+<img class="gif" src="images/Yes_yes_she_does.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_does.gif">
+<img class="gif" src="images/No_no_she_doesnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_doesnt.gif">
+<img class="gif" src="images/Yes_yes_she_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_did.gif">
+<img class="gif" src="images/No_no_she_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_didnt.gif">
+<img class="gif" src="images/Yes_yes_she_has.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_has.gif">
+<img class="gif" src="images/No_no_she_hasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_hasnt.gif">
+<img class="gif" src="images/Yes_yes_she_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_had.gif">
+<img class="gif" src="images/No_no_she_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_hadnt.gif">
+<img class="gif" src="images/Yes_yes_she_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_can.gif">
+<img class="gif" src="images/No_no_she_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_cant.gif">
+<img class="gif" src="images/Yes_yes_she_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_could.gif">
+<img class="gif" src="images/No_no_she_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_couldnt.gif">
+<img class="gif" src="images/Yes_yes_she_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_will.gif">
+<img class="gif" src="images/No_no_she_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_wont.gif">
+<img class="gif" src="images/Yes_yes_she_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_would.gif">
+<img class="gif" src="images/No_no_she_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_wouldnt.gif">
+<img class="gif" src="images/Yes_yes_she_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_should.gif">
+<img class="gif" src="images/No_no_she_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_shouldnt.gif">
+<img class="gif" src="images/Yes_yes_she_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_must.gif">
+<img class="gif" src="images/No_no_she_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_mustnt.gif">
+<img class="gif" src="images/Yes_yes_she_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_might.gif">
+<img class="gif" src="images/No_no_she_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_might_not.gif">
+<img class="gif" src="images/Yes_yes_she_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_may.gif">
+<img class="gif" src="images/No_no_she_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_may_not.gif">
+</div>
+<div class='jump'><a href='#top'>Jump to Top</a></div>
+</section>
+<section id='we'>
+<h2>We</h2>
+<div class='pairgrid'>
+<img class="gif" src="images/Yes_yes_we_are.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_are.gif">
+<img class="gif" src="images/No_no_we_arent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_arent.gif">
+<img class="gif" src="images/Yes_yes_we_were.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_were.gif">
+<img class="gif" src="images/No_no_we_werent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_werent.gif">
+<img class="gif" src="images/Yes_yes_we_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_do.gif">
+<img class="gif" src="images/No_no_we_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_dont.gif">
+<img class="gif" src="images/Yes_yes_we_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_did.gif">
+<img class="gif" src="images/No_no_we_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_didnt.gif">
+<img class="gif" src="images/Yes_yes_we_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_have.gif">
+<img class="gif" src="images/No_no_we_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_havent.gif">
+<img class="gif" src="images/Yes_yes_we_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_had.gif">
+<img class="gif" src="images/No_no_we_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_hadnt.gif">
+<img class="gif" src="images/Yes_yes_we_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_can.gif">
+<img class="gif" src="images/No_no_we_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_cant.gif">
+<img class="gif" src="images/Yes_yes_we_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_could.gif">
+<img class="gif" src="images/No_no_we_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_couldnt.gif">
+<img class="gif" src="images/Yes_yes_we_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_will.gif">
+<img class="gif" src="images/No_no_we_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_wont.gif">
+<img class="gif" src="images/Yes_yes_we_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_would.gif">
+<img class="gif" src="images/No_no_we_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_wouldnt.gif">
+<img class="gif" src="images/Yes_yes_we_shall.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_shall.gif">
+<img class="gif" src="images/No_no_we_shall_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_shall_not.gif">
+<img class="gif" src="images/Yes_yes_we_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_should.gif">
+<img class="gif" src="images/No_no_we_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_shouldnt.gif">
+<img class="gif" src="images/Yes_yes_we_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_must.gif">
+<img class="gif" src="images/No_no_we_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_mustnt.gif">
+<img class="gif" src="images/Yes_yes_we_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_might.gif">
+<img class="gif" src="images/No_no_we_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_might_not.gif">
+<img class="gif" src="images/Yes_yes_we_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_may.gif">
+<img class="gif" src="images/No_no_we_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_may_not.gif">
+</div>
+<div class='jump'><a href='#top'>Jump to Top</a></div>
+</section>
+<section id='they'>
+<h2>They</h2>
+<div class='pairgrid'>
+<img class="gif" src="images/Yes_yes_they_are.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_are.gif">
+<img class="gif" src="images/No_no_they_arent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_arent.gif">
+<img class="gif" src="images/Yes_yes_they_were.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_were.gif">
+<img class="gif" src="images/No_no_they_werent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_werent.gif">
+<img class="gif" src="images/Yes_yes_they_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_do.gif">
+<img class="gif" src="images/No_no_they_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_dont.gif">
+<img class="gif" src="images/Yes_yes_they_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_did.gif">
+<img class="gif" src="images/No_no_they_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_didnt.gif">
+<img class="gif" src="images/Yes_yes_they_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_have.gif">
+<img class="gif" src="images/No_no_they_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_havent.gif">
+<img class="gif" src="images/Yes_yes_they_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_had.gif">
+<img class="gif" src="images/No_no_they_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_hadnt.gif">
+<img class="gif" src="images/Yes_yes_they_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_can.gif">
+<img class="gif" src="images/No_no_they_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_cant.gif">
+<img class="gif" src="images/Yes_yes_they_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_could.gif">
+<img class="gif" src="images/No_no_they_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_couldnt.gif">
+<img class="gif" src="images/Yes_yes_they_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_will.gif">
+<img class="gif" src="images/No_no_they_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_wont.gif">
+<img class="gif" src="images/Yes_yes_they_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_would.gif">
+<img class="gif" src="images/No_no_they_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_wouldnt.gif">
+<img class="gif" src="images/Yes_yes_they_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_should.gif">
+<img class="gif" src="images/No_no_they_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_shouldnt.gif">
+<img class="gif" src="images/Yes_yes_they_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_must.gif">
+<img class="gif" src="images/No_no_they_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_mustnt.gif">
+<img class="gif" src="images/Yes_yes_they_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_might.gif">
+<img class="gif" src="images/No_no_they_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_might_not.gif">
+<img class="gif" src="images/Yes_yes_they_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_may.gif">
+<img class="gif" src="images/No_no_they_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_may_not.gif">
+</div>
+<div class='jump'><a href='#top'>Jump to Top</a></div>
+</section>
+</main></body></html>
