@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GIF Index</title>
 <style>:root{
-  /* Bold-but-clean palette */
   --bg: #0b1220;
   --ink: #e5e7eb;
   --muted: rgba(229,231,235,.72);
@@ -376,31 +375,51 @@ h2::after{
 </main>
 <script>
 (() => {
+  const PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
   const imgs = Array.from(document.querySelectorAll('img.lazygif[data-src]'));
-  const loadImg = (img) => {
+
+  const load = (img) => {
     const src = img.getAttribute('data-src');
     if (!src) return;
+    if (img.dataset.state === 'loaded') return;
+    img.dataset.state = 'loaded';
     img.src = src;
-    img.removeAttribute('data-src');
     img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
   };
 
+  const unload = (img) => {
+    const src = img.getAttribute('data-src');
+    if (!src) return;
+    if (img.dataset.state !== 'loaded') return;
+    img.dataset.state = 'idle';
+    img.classList.remove('is-loaded');
+    img.src = PLACEHOLDER; // stops animation + reduces memory/CPU
+  };
+
   if (!('IntersectionObserver' in window)) {
-    // Fallback: load everything (still benefits from content-visibility)
-    imgs.forEach(loadImg);
+    imgs.forEach(load);
     return;
   }
 
-  const io = new IntersectionObserver((entries) => {
+  const nearObserver = new IntersectionObserver((entries) => {
     for (const e of entries) {
-      if (e.isIntersecting) {
-        loadImg(e.target);
-        io.unobserve(e.target);
-      }
+      if (e.isIntersecting) load(e.target);
     }
-  }, { root: null, rootMargin: '800px 0px', threshold: 0.01 });
+  }, { root: null, rootMargin: '300px 0px', threshold: 0.01 });
 
-  imgs.forEach(img => io.observe(img));
+  const farObserver = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) unload(e.target);
+    }
+  }, { root: null, rootMargin: '900px 0px', threshold: 0.0 });
+
+  imgs.forEach(img => {
+    img.dataset.state = 'idle';
+    // Ensure placeholder initial state
+    if (!img.getAttribute('src')) img.setAttribute('src', PLACEHOLDER);
+    nearObserver.observe(img);
+    farObserver.observe(img);
+  });
 })();
 </script>
 </body></html>
