@@ -401,21 +401,54 @@ h2::after{
     return;
   }
 
+  // Hysteresis + debounce to avoid thrashing while you scroll.
+  const LOAD_MARGIN = '650px 0px';     // start animation when fairly near
+  const UNLOAD_MARGIN = '1300px 0px';  // only stop when well away
+  const UNLOAD_DELAY_MS = 900;         // wait a beat before stopping
+
+  const unloadTimers = new WeakMap();
+
+  const cancelUnload = (img) => {
+    const t = unloadTimers.get(img);
+    if (t) {
+      clearTimeout(t);
+      unloadTimers.delete(img);
+    }
+  };
+
+  const scheduleUnload = (img) => {
+    if (unloadTimers.has(img)) return;
+    const t = setTimeout(() => {
+      unloadTimers.delete(img);
+      if (img.dataset.far === '1') unload(img);
+    }, UNLOAD_DELAY_MS);
+    unloadTimers.set(img, t);
+  };
+
   const nearObserver = new IntersectionObserver((entries) => {
     for (const e of entries) {
-      if (e.isIntersecting) load(e.target);
+      if (e.isIntersecting) {
+        cancelUnload(e.target);
+        load(e.target);
+      }
     }
-  }, { root: null, rootMargin: '300px 0px', threshold: 0.01 });
+  }, { root: null, rootMargin: LOAD_MARGIN, threshold: 0.01 });
 
   const farObserver = new IntersectionObserver((entries) => {
     for (const e of entries) {
-      if (!e.isIntersecting) unload(e.target);
+      if (e.isIntersecting) {
+        e.target.dataset.far = '0';
+        cancelUnload(e.target);
+      } else {
+        e.target.dataset.far = '1';
+        scheduleUnload(e.target);
+      }
     }
-  }, { root: null, rootMargin: '900px 0px', threshold: 0.0 });
+  }, { root: null, rootMargin: UNLOAD_MARGIN, threshold: 0.0 });
 
   imgs.forEach(img => {
     img.dataset.state = 'idle';
-    // Ensure placeholder initial state
+    img.dataset.far = '1';
     if (!img.getAttribute('src')) img.setAttribute('src', PLACEHOLDER);
     nearObserver.observe(img);
     farObserver.observe(img);
