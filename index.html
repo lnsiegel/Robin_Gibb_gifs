@@ -4,6 +4,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>GIF Index</title>
 <style>:root{
+  --header-h: 72px;
   --bg:#0b1220;
   --ink:#e5e7eb;
   --muted:rgba(229,231,235,.72);
@@ -17,7 +18,7 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 20px)}
 
 body{
   margin:0;
@@ -52,6 +53,7 @@ nav.toc{
   flex-wrap:wrap;
   gap:10px;
 }
+.toc-title{font-weight:700;margin-bottom:6px}
 nav.toc a{
   text-decoration:none;
   color:var(--ink);
@@ -80,7 +82,6 @@ main{
 
 /* Sections */
 section{
-  scroll-margin-top:72px;
   margin-top:18px;
   border-radius:var(--radius);
   border:1px solid var(--line);
@@ -91,7 +92,6 @@ section{
 section:first-of-type{ margin-top:12px; }
 
 h2{
-  scroll-margin-top:72px;
   margin:0 0 10px;
   font-size:18px;
   font-weight:750;
@@ -188,16 +188,20 @@ h2::after{
 #homeTop{display:inline-flex;align-items:center;gap:8px;}
 #homeTop .homeIcon{display:inline-flex;width:14px;height:14px;}
 #homeTop .homeIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.toc-title{flex-basis:100%;font-weight:800;font-size:22px;margin:0 0 6px 0;color:#e5e7eb}
+.titlebar{font-weight:800;font-size:22px;padding:10px 14px;border-bottom:1px solid rgba(148,163,184,.20);background:rgba(11,18,32,.85);}
 </style>
 </head><body id='top'>
-<header><div class='wrap'><nav class='toc' aria-label='Table of contents'>
+<header>
+<div class='wrap'><nav class='toc' aria-label='Table of contents'>
+<div class='toc-title'>Robin Gibb GIFs</div>
 <a href='#' id='homeTop'><span class='homeIcon' aria-hidden='true'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' focusable='false' aria-hidden='true'><path d='M3 10.5 12 3l9 7.5'/><path d='M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10'/></svg></span>Home</a>
-<a href='#i'>I</a>
-<a href='#you'>You</a>
-<a href='#he'>He</a>
-<a href='#she'>She</a>
-<a href='#we'>We</a>
-<a href='#they'>They</a>
+<a href='#i-h'>I</a>
+<a href='#you-h'>You</a>
+<a href='#he-h'>He</a>
+<a href='#she-h'>She</a>
+<a href='#we-h'>We</a>
+<a href='#they-h'>They</a>
 </nav></div></header>
 <main id="viewer" aria-live="polite">
   <div id="viewerCard">
@@ -211,7 +215,7 @@ h2::after{
   </div>
 </main>
 <main id='list'>
-<section id='i'><h2>I</h2>
+<section id='i'><h2 id='i-h'>I</h2>
 <div class='pair'>
 <a class='yes' href='#gif=Yes_yes_I_am.gif' data-file='Yes_yes_I_am.gif'>Yes, yes I am.</a>
 <div class='spacer'></div>
@@ -289,7 +293,7 @@ h2::after{
 </div>
 <div class='jump'><a href='#top'>Jump to Top.</a></div>
 </section>
-<section id='you'><h2>You</h2>
+<section id='you'><h2 id='you-h'>You</h2>
 <div class='pair'>
 <a class='yes' href='#gif=Yes_yes_you_are.gif' data-file='Yes_yes_you_are.gif'>Yes, yes you are.</a>
 <div class='spacer'></div>
@@ -367,7 +371,7 @@ h2::after{
 </div>
 <div class='jump'><a href='#top'>Jump to Top.</a></div>
 </section>
-<section id='he'><h2>He</h2>
+<section id='he'><h2 id='he-h'>He</h2>
 <div class='pair'>
 <a class='yes' href='#gif=Yes_yes_he_is.gif' data-file='Yes_yes_he_is.gif'>Yes, yes he is.</a>
 <div class='spacer'></div>
@@ -440,7 +444,7 @@ h2::after{
 </div>
 <div class='jump'><a href='#top'>Jump to Top.</a></div>
 </section>
-<section id='she'><h2>She</h2>
+<section id='she'><h2 id='she-h'>She</h2>
 <div class='pair'>
 <a class='yes' href='#gif=Yes_yes_she_is.gif' data-file='Yes_yes_she_is.gif'>Yes, yes she is.</a>
 <div class='spacer'></div>
@@ -513,7 +517,7 @@ h2::after{
 </div>
 <div class='jump'><a href='#top'>Jump to Top.</a></div>
 </section>
-<section id='we'><h2>We</h2>
+<section id='we'><h2 id='we-h'>We</h2>
 <div class='pair'>
 <a class='yes' href='#gif=Yes_yes_we_are.gif' data-file='Yes_yes_we_are.gif'>Yes, yes we are.</a>
 <div class='spacer'></div>
@@ -591,7 +595,7 @@ h2::after{
 </div>
 <div class='jump'><a href='#top'>Jump to Top.</a></div>
 </section>
-<section id='they'><h2>They</h2>
+<section id='they'><h2 id='they-h'>They</h2>
 <div class='pair'>
 <a class='yes' href='#gif=Yes_yes_they_are.gif' data-file='Yes_yes_they_are.gif'>Yes, yes they are.</a>
 <div class='spacer'></div>
@@ -667,6 +671,17 @@ h2::after{
 </main>
 <script>
 (() => {
+
+  // Keep anchor jumps from hiding content under the sticky header
+  function updateHeaderHeightVar(){
+    const header = document.querySelector('header');
+    if(!header) return;
+    const h = Math.ceil(header.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+  function updateHeaderHeightVarSoon(){requestAnimationFrame(()=>requestAnimationFrame(updateHeaderHeightVar));setTimeout(updateHeaderHeightVar,0);}
+window.addEventListener('resize', updateHeaderHeightVarSoon);
+
   const gifs = ["Yes_yes_I_am.gif", "No_no_Im_not.gif", "Yes_yes_I_was.gif", "No_no_I_wasnt.gif", "Yes_yes_I_do.gif", "No_no_I_dont.gif", "Yes_yes_I_did.gif", "No_no_I_didnt.gif", "Yes_yes_I_have.gif", "No_no_I_havent.gif", "Yes_yes_I_had.gif", "No_no_I_hadnt.gif", "Yes_yes_I_can.gif", "No_no_I_cant.gif", "Yes_yes_I_could.gif", "No_no_I_couldnt.gif", "Yes_yes_I_will.gif", "No_no_I_wont.gif", "Yes_yes_I_would.gif", "No_no_I_wouldnt.gif", "Yes_yes_I_shall.gif", "No_no_I_shall_not.gif", "Yes_yes_I_should.gif", "No_no_I_shouldnt.gif", "Yes_yes_I_must.gif", "No_no_I_mustnt.gif", "Yes_yes_I_might.gif", "No_no_I_might_not.gif", "Yes_yes_I_may.gif", "No_no_I_may_not.gif", "Yes_yes_you_are.gif", "No_no_you_arent.gif", "Yes_yes_you_were.gif", "No_no_you_werent.gif", "Yes_yes_you_do.gif", "No_no_you_dont.gif", "Yes_yes_you_did.gif", "No_no_you_didnt.gif", "Yes_yes_you_have.gif", "No_no_you_havent.gif", "Yes_yes_you_had.gif", "No_no_you_hadnt.gif", "Yes_yes_you_can.gif", "No_no_you_cant.gif", "Yes_yes_you_could.gif", "No_no_you_couldnt.gif", "Yes_yes_you_will.gif", "No_no_you_wont.gif", "Yes_yes_you_would.gif", "No_no_you_wouldnt.gif", "Yes_yes_you_shall.gif", "No_no_you_shall_not.gif", "Yes_yes_you_should.gif", "No_no_you_shouldnt.gif", "Yes_yes_you_must.gif", "No_no_you_mustnt.gif", "Yes_yes_you_might.gif", "No_no_you_might_not.gif", "Yes_yes_you_may.gif", "No_no_you_may_not.gif", "Yes_yes_he_is.gif", "No_no_he_isnt.gif", "Yes_yes_he_was.gif", "No_no_he_wasnt.gif", "Yes_yes_he_does.gif", "No_no_he_doesnt.gif", "Yes_yes_he_did.gif", "No_no_he_didnt.gif", "Yes_yes_he_has.gif", "No_no_he_hasnt.gif", "Yes_yes_he_had.gif", "No_no_he_hadnt.gif", "Yes_yes_he_can.gif", "No_no_he_cant.gif", "Yes_yes_he_could.gif", "No_no_he_couldnt.gif", "Yes_yes_he_will.gif", "No_no_he_wont.gif", "Yes_yes_he_would.gif", "No_no_he_wouldnt.gif", "Yes_yes_he_should.gif", "No_no_he_shouldnt.gif", "Yes_yes_he_must.gif", "No_no_he_mustnt.gif", "Yes_yes_he_might.gif", "No_no_he_might_not.gif", "Yes_yes_he_may.gif", "No_no_he_may_not.gif", "Yes_yes_she_is.gif", "No_no_she_isnt.gif", "Yes_yes_she_was.gif", "No_no_she_wasnt.gif", "Yes_yes_she_does.gif", "No_no_she_doesnt.gif", "Yes_yes_she_did.gif", "No_no_she_didnt.gif", "Yes_yes_she_has.gif", "No_no_she_hasnt.gif", "Yes_yes_she_had.gif", "No_no_she_hadnt.gif", "Yes_yes_she_can.gif", "No_no_she_cant.gif", "Yes_yes_she_could.gif", "No_no_she_couldnt.gif", "Yes_yes_she_will.gif", "No_no_she_wont.gif", "Yes_yes_she_would.gif", "No_no_she_wouldnt.gif", "Yes_yes_she_should.gif", "No_no_she_shouldnt.gif", "Yes_yes_she_must.gif", "No_no_she_mustnt.gif", "Yes_yes_she_might.gif", "No_no_she_might_not.gif", "Yes_yes_she_may.gif", "No_no_she_may_not.gif", "Yes_yes_we_are.gif", "No_no_we_arent.gif", "Yes_yes_we_were.gif", "No_no_we_werent.gif", "Yes_yes_we_do.gif", "No_no_we_dont.gif", "Yes_yes_we_did.gif", "No_no_we_didnt.gif", "Yes_yes_we_have.gif", "No_no_we_havent.gif", "Yes_yes_we_had.gif", "No_no_we_hadnt.gif", "Yes_yes_we_can.gif", "No_no_we_cant.gif", "Yes_yes_we_could.gif", "No_no_we_couldnt.gif", "Yes_yes_we_will.gif", "No_no_we_wont.gif", "Yes_yes_we_would.gif", "No_no_we_wouldnt.gif", "Yes_yes_we_shall.gif", "No_no_we_shall_not.gif", "Yes_yes_we_should.gif", "No_no_we_shouldnt.gif", "Yes_yes_we_must.gif", "No_no_we_mustnt.gif", "Yes_yes_we_might.gif", "No_no_we_might_not.gif", "Yes_yes_we_may.gif", "No_no_we_may_not.gif", "Yes_yes_they_are.gif", "No_no_they_arent.gif", "Yes_yes_they_were.gif", "No_no_they_werent.gif", "Yes_yes_they_do.gif", "No_no_they_dont.gif", "Yes_yes_they_did.gif", "No_no_they_didnt.gif", "Yes_yes_they_have.gif", "No_no_they_havent.gif", "Yes_yes_they_had.gif", "No_no_they_hadnt.gif", "Yes_yes_they_can.gif", "No_no_they_cant.gif", "Yes_yes_they_could.gif", "No_no_they_couldnt.gif", "Yes_yes_they_will.gif", "No_no_they_wont.gif", "Yes_yes_they_would.gif", "No_no_they_wouldnt.gif", "Yes_yes_they_should.gif", "No_no_they_shouldnt.gif", "Yes_yes_they_must.gif", "No_no_they_mustnt.gif", "Yes_yes_they_might.gif", "No_no_they_might_not.gif", "Yes_yes_they_may.gif", "No_no_they_may_not.gif"];
   const listEl = document.getElementById('list');
   const viewerEl = document.getElementById('viewer');
@@ -678,6 +693,7 @@ h2::after{
   const backLink = document.getElementById('backLink');
 
   let lastListHash = '';
+  updateHeaderHeightVar();
 
   function showList() {
     viewerEl.style.display = 'none';
@@ -717,6 +733,7 @@ h2::after{
   }
 
   function handleHash() {
+    updateHeaderHeightVar();
     const raw = location.hash || '';
     const h = raw.startsWith('#') ? raw.slice(1) : raw;
 
