@@ -182,10 +182,16 @@ h2::after{
 .viewerNav a:hover{
   border-color:var(--line-strong);
   background:rgba(255,255,255,.10);
-}</style>
+}
+
+/* Home icon (inline SVG; no external resources) */
+#homeTop{display:inline-flex;align-items:center;gap:8px;}
+#homeTop .homeIcon{display:inline-flex;width:14px;height:14px;}
+#homeTop .homeIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+</style>
 </head><body id='top'>
 <header><div class='wrap'><nav class='toc' aria-label='Table of contents'>
-<a href='#' id='homeTop'>Home</a>
+<a href='#' id='homeTop'><span class='homeIcon' aria-hidden='true'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' focusable='false' aria-hidden='true'><path d='M3 10.5 12 3l9 7.5'/><path d='M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10'/></svg></span>Home</a>
 <a href='#i'>I</a>
 <a href='#you'>You</a>
 <a href='#he'>He</a>
