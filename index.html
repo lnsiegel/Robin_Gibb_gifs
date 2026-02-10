@@ -759,6 +759,26 @@ window.addEventListener('resize', updateHeaderHeightVarSoon);
 
   window.addEventListener('hashchange', handleHash);
   window.addEventListener('load', handleHash);
+
+  // Fix nav buttons so they work directly from viewer
+  document.querySelectorAll('nav.toc a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return; // home handled normally
+      if (href.startsWith('#gif=')) return;
+
+      e.preventDefault();
+      const target = href.slice(1);
+
+      // exit viewer immediately
+      viewerEl.style.display = 'none';
+      listEl.style.display = 'block';
+
+      // jump directly to section
+      location.hash = target;
+    });
+  });
+
 })();
 </script>
 </body></html>
