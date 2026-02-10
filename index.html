@@ -1,36 +1,29 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang='en'><head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>GIF Index</title>
 <style>:root{
-  --bg: #0b1220;
-  --ink: #e5e7eb;
-  --muted: rgba(229,231,235,.72);
-  --line: rgba(148,163,184,.20);
-  --line-strong: rgba(148,163,184,.35);
-
-  --page-pad: 16px;
-
-  --row-gap: 14px;
-  --col-gap: 10px;
-
-  /* Scale columns down to fit the window when needed (caps at 256px). */
-  --col: min(256px, calc((min(100vw, 980px) - (2 * var(--page-pad)) - 24px - var(--col-gap)) / 2));
-
-  --radius: 14px;
-  --shadow: 0 1px 0 rgba(255,255,255,.03),
-            0 18px 50px rgba(0,0,0,.55);
+  --bg:#0b1220;
+  --ink:#e5e7eb;
+  --muted:rgba(229,231,235,.72);
+  --line:rgba(148,163,184,.20);
+  --line-strong:rgba(148,163,184,.35);
+  --card:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.04);
+  --page-pad:16px;
+  --radius:14px;
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 18px 50px rgba(0,0,0,.55);
 }
 
-*{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
 body{
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.32;
-  color: var(--ink);
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.32;
+  color:var(--ink);
   background:
     radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.18), transparent 55%),
     radial-gradient(900px 500px at 90% 0%, rgba(167,139,250,.14), transparent 55%),
@@ -40,115 +33,155 @@ body{
 
 /* Sticky top nav */
 header{
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  backdrop-filter: blur(12px);
-  background: rgba(11,18,32,.78);
-  border-bottom: 1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:blur(12px);
+  background:rgba(11,18,32,.78);
+  border-bottom:1px solid var(--line);
 }
 header .wrap{
-  padding: 10px 14px;
-  max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-start;
+  padding:10px 14px;
+  max-width:980px;
+  margin:0 auto;
+  display:flex;
+  justify-content:flex-start;
 }
 nav.toc{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
 }
 nav.toc a{
-  text-decoration: none;
-  color: var(--ink);
-  font-size: 13px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.06);
-  box-shadow: 0 1px 0 rgba(255,255,255,.05);
+  text-decoration:none;
+  color:var(--ink);
+  font-size:13px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  box-shadow:0 1px 0 rgba(255,255,255,.05);
 }
 nav.toc a:hover{
-  border-color: var(--line-strong);
-  background: rgba(255,255,255,.10);
+  border-color:var(--line-strong);
+  background:rgba(255,255,255,.10);
 }
 nav.toc a:focus-visible{
-  outline: 2px solid rgba(96,165,250,.65);
-  outline-offset: 2px;
+  outline:2px solid rgba(96,165,250,.65);
+  outline-offset:2px;
 }
 
 main{
-  max-width: 980px;
-  margin: 0 auto;
-  padding: var(--page-pad);
+  max-width:980px;
+  margin:0 auto;
+  padding:var(--page-pad);
 }
 
 /* Sections */
 section{
-  scroll-margin-top: 72px;
-  margin-top: 18px;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-  box-shadow: var(--shadow);
-  padding: 12px 12px 14px;
+  scroll-margin-top:72px;
+  margin-top:18px;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  box-shadow:var(--shadow);
+  padding:12px 12px 14px;
 }
-section:first-of-type{ margin-top: 12px; }
+section:first-of-type{ margin-top:12px; }
 
 h2{
-  scroll-margin-top: 72px;
-  margin: 0 0 10px;
-  font-size: 18px;
-  font-weight: 750;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  color: rgba(229,231,235,.92);
+  scroll-margin-top:72px;
+  margin:0 0 10px;
+  font-size:18px;
+  font-weight:750;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  color:rgba(229,231,235,.92);
 }
 h2::after{
-  content: "";
-  display: block;
-  height: 1px;
-  margin-top: 8px;
-  background: linear-gradient(90deg, rgba(96,165,250,.65), rgba(167,139,250,.35), transparent 70%);
+  content:"";
+  display:block;
+  height:1px;
+  margin-top:8px;
+  background:linear-gradient(90deg, rgba(96,165,250,.65), rgba(167,139,250,.35), transparent 70%);
 }
 
-/* Two-column paired grid that scales down to fit */
-.pairgrid{
-  display: grid;
-  grid-template-columns: var(--col) var(--col);
-  column-gap: var(--col-gap);
-  row-gap: var(--row-gap);
-  justify-content: start;
+/* Pair cards */
+.pair{
+  border:1px solid rgba(148,163,184,.20);
+  background:linear-gradient(180deg, var(--card), var(--card2));
+  border-radius:12px;
+  padding:10px 12px;
+  margin:0 0 12px;
 }
-
-.gif{
-  display: block;
-  width: var(--col);
-  height: var(--col);
-  border-radius: 10px;
-  border: 1px solid rgba(148,163,184,.22);
-  background: #0b1220;
-  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+.pair a{
+  display:block;
+  text-decoration:none;
+  font-size:14px;
+  color:#93c5fd;
+  padding:3px 0;
+  overflow-wrap:anywhere;
 }
+.pair a:hover{ text-decoration:underline; }
 
-/* Placeholder fade-in */
-.lazygif{ opacity: .9; }
-.lazygif.is-loaded{ opacity: 1; }
+.pair a.no{ color:rgba(167,139,250,.95); }
+.pair .spacer{ height:4px; }
 
-.jump{ margin-top: 10px; }
+.jump{ margin-top:10px; }
 .jump a{
-  font-size: 12px;
-  color: var(--muted);
-  text-decoration: none;
+  font-size:12px;
+  color:var(--muted);
+  text-decoration:none;
 }
-.jump a:hover{ text-decoration: underline; }
+.jump a:hover{ text-decoration:underline; }
 
-@media (prefers-reduced-motion: reduce){
-  html{ scroll-behavior: auto; }
+/* Viewer */
+#viewer{
+  display:none;
+  text-align:center;
+  padding-top:6px;
+}
+#viewerCard{
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  box-shadow:var(--shadow);
+  padding:14px 14px 10px;
+}
+#viewerTitle{
+  font-size:14px;
+  color:rgba(229,231,235,.85);
+  margin:0 0 10px;
+  overflow-wrap:anywhere;
+}
+#viewerImg{
+  width:min(512px, 100%);
+  height:auto;
+  border-radius:12px;
+  border:1px solid rgba(148,163,184,.22);
+  background:#0b1220;
+}
+.viewerNav{
+  margin-top:12px;
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.viewerNav a{
+  text-decoration:none;
+  color:#93c5fd;
+  font-size:14px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+}
+.viewerNav a:hover{
+  border-color:var(--line-strong);
+  background:rgba(255,255,255,.10);
 }</style>
-</head>
-<body id="top">
+</head><body id='top'>
 <header><div class='wrap'><nav class='toc' aria-label='Table of contents'>
 <a href='#i'>I</a>
 <a href='#you'>You</a>
@@ -157,254 +190,555 @@ h2::after{
 <a href='#we'>We</a>
 <a href='#they'>They</a>
 </nav></div></header>
-<main>
-<section id='i'>
-<h2>I</h2>
-<div class='pairgrid'>
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_am.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_am.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_Im_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_Im_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_was.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_was.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_wasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_wasnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_do.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_dont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_did.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_didnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_have.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_havent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_had.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_hadnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_can.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_cant.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_could.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_couldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_will.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_wont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_would.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_wouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_shall.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_shall.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_shall_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_shall_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_should.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_shouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_must.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_mustnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_might.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_might_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_I_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_I_may.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_I_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_I_may_not.gif">
+<main id="viewer" aria-live="polite">
+  <div id="viewerCard">
+    <div id="viewerTitle"></div>
+    <img id="viewerImg" src="" alt="">
+    <div class="viewerNav">
+      <a href="#" id="prevLink">Prev</a>
+      <a href="#" id="backLink">Back</a>
+      <a href="#" id="nextLink">Next</a>
+    </div>
+  </div>
+</main>
+<main id='list'>
+<section id='i'><h2>I</h2>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_am.gif' data-file='Yes_yes_I_am.gif'>Yes_yes_I_am</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_Im_not.gif' data-file='No_no_Im_not.gif'>No_no_Im_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_was.gif' data-file='Yes_yes_I_was.gif'>Yes_yes_I_was</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_wasnt.gif' data-file='No_no_I_wasnt.gif'>No_no_I_wasnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_do.gif' data-file='Yes_yes_I_do.gif'>Yes_yes_I_do</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_dont.gif' data-file='No_no_I_dont.gif'>No_no_I_dont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_did.gif' data-file='Yes_yes_I_did.gif'>Yes_yes_I_did</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_didnt.gif' data-file='No_no_I_didnt.gif'>No_no_I_didnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_have.gif' data-file='Yes_yes_I_have.gif'>Yes_yes_I_have</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_havent.gif' data-file='No_no_I_havent.gif'>No_no_I_havent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_had.gif' data-file='Yes_yes_I_had.gif'>Yes_yes_I_had</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_hadnt.gif' data-file='No_no_I_hadnt.gif'>No_no_I_hadnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_can.gif' data-file='Yes_yes_I_can.gif'>Yes_yes_I_can</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_cant.gif' data-file='No_no_I_cant.gif'>No_no_I_cant</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_could.gif' data-file='Yes_yes_I_could.gif'>Yes_yes_I_could</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_couldnt.gif' data-file='No_no_I_couldnt.gif'>No_no_I_couldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_will.gif' data-file='Yes_yes_I_will.gif'>Yes_yes_I_will</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_wont.gif' data-file='No_no_I_wont.gif'>No_no_I_wont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_would.gif' data-file='Yes_yes_I_would.gif'>Yes_yes_I_would</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_wouldnt.gif' data-file='No_no_I_wouldnt.gif'>No_no_I_wouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_shall.gif' data-file='Yes_yes_I_shall.gif'>Yes_yes_I_shall</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_shall_not.gif' data-file='No_no_I_shall_not.gif'>No_no_I_shall_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_should.gif' data-file='Yes_yes_I_should.gif'>Yes_yes_I_should</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_shouldnt.gif' data-file='No_no_I_shouldnt.gif'>No_no_I_shouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_must.gif' data-file='Yes_yes_I_must.gif'>Yes_yes_I_must</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_mustnt.gif' data-file='No_no_I_mustnt.gif'>No_no_I_mustnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_might.gif' data-file='Yes_yes_I_might.gif'>Yes_yes_I_might</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_might_not.gif' data-file='No_no_I_might_not.gif'>No_no_I_might_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_I_may.gif' data-file='Yes_yes_I_may.gif'>Yes_yes_I_may</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_I_may_not.gif' data-file='No_no_I_may_not.gif'>No_no_I_may_not</a>
 </div>
 <div class='jump'><a href='#top'>Jump to Top</a></div>
 </section>
-<section id='you'>
-<h2>You</h2>
-<div class='pairgrid'>
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_are.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_are.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_arent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_arent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_were.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_were.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_werent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_werent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_do.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_dont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_did.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_didnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_have.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_havent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_had.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_hadnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_can.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_cant.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_could.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_couldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_will.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_wont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_would.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_wouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_shall.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_shall.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_shall_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_shall_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_should.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_shouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_must.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_mustnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_might.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_might_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_you_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_you_may.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_you_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_you_may_not.gif">
+<section id='you'><h2>You</h2>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_are.gif' data-file='Yes_yes_you_are.gif'>Yes_yes_you_are</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_arent.gif' data-file='No_no_you_arent.gif'>No_no_you_arent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_were.gif' data-file='Yes_yes_you_were.gif'>Yes_yes_you_were</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_werent.gif' data-file='No_no_you_werent.gif'>No_no_you_werent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_do.gif' data-file='Yes_yes_you_do.gif'>Yes_yes_you_do</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_dont.gif' data-file='No_no_you_dont.gif'>No_no_you_dont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_did.gif' data-file='Yes_yes_you_did.gif'>Yes_yes_you_did</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_didnt.gif' data-file='No_no_you_didnt.gif'>No_no_you_didnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_have.gif' data-file='Yes_yes_you_have.gif'>Yes_yes_you_have</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_havent.gif' data-file='No_no_you_havent.gif'>No_no_you_havent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_had.gif' data-file='Yes_yes_you_had.gif'>Yes_yes_you_had</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_hadnt.gif' data-file='No_no_you_hadnt.gif'>No_no_you_hadnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_can.gif' data-file='Yes_yes_you_can.gif'>Yes_yes_you_can</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_cant.gif' data-file='No_no_you_cant.gif'>No_no_you_cant</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_could.gif' data-file='Yes_yes_you_could.gif'>Yes_yes_you_could</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_couldnt.gif' data-file='No_no_you_couldnt.gif'>No_no_you_couldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_will.gif' data-file='Yes_yes_you_will.gif'>Yes_yes_you_will</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_wont.gif' data-file='No_no_you_wont.gif'>No_no_you_wont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_would.gif' data-file='Yes_yes_you_would.gif'>Yes_yes_you_would</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_wouldnt.gif' data-file='No_no_you_wouldnt.gif'>No_no_you_wouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_shall.gif' data-file='Yes_yes_you_shall.gif'>Yes_yes_you_shall</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_shall_not.gif' data-file='No_no_you_shall_not.gif'>No_no_you_shall_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_should.gif' data-file='Yes_yes_you_should.gif'>Yes_yes_you_should</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_shouldnt.gif' data-file='No_no_you_shouldnt.gif'>No_no_you_shouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_must.gif' data-file='Yes_yes_you_must.gif'>Yes_yes_you_must</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_mustnt.gif' data-file='No_no_you_mustnt.gif'>No_no_you_mustnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_might.gif' data-file='Yes_yes_you_might.gif'>Yes_yes_you_might</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_might_not.gif' data-file='No_no_you_might_not.gif'>No_no_you_might_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_you_may.gif' data-file='Yes_yes_you_may.gif'>Yes_yes_you_may</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_you_may_not.gif' data-file='No_no_you_may_not.gif'>No_no_you_may_not</a>
 </div>
 <div class='jump'><a href='#top'>Jump to Top</a></div>
 </section>
-<section id='he'>
-<h2>He</h2>
-<div class='pairgrid'>
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_is.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_is.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_isnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_isnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_was.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_was.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_wasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_wasnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_does.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_does.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_doesnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_doesnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_did.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_didnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_has.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_has.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_hasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_hasnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_had.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_hadnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_can.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_cant.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_could.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_couldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_will.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_wont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_would.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_wouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_should.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_shouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_must.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_mustnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_might.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_might_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_he_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_he_may.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_he_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_he_may_not.gif">
+<section id='he'><h2>He</h2>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_is.gif' data-file='Yes_yes_he_is.gif'>Yes_yes_he_is</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_isnt.gif' data-file='No_no_he_isnt.gif'>No_no_he_isnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_was.gif' data-file='Yes_yes_he_was.gif'>Yes_yes_he_was</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_wasnt.gif' data-file='No_no_he_wasnt.gif'>No_no_he_wasnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_does.gif' data-file='Yes_yes_he_does.gif'>Yes_yes_he_does</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_doesnt.gif' data-file='No_no_he_doesnt.gif'>No_no_he_doesnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_did.gif' data-file='Yes_yes_he_did.gif'>Yes_yes_he_did</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_didnt.gif' data-file='No_no_he_didnt.gif'>No_no_he_didnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_has.gif' data-file='Yes_yes_he_has.gif'>Yes_yes_he_has</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_hasnt.gif' data-file='No_no_he_hasnt.gif'>No_no_he_hasnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_had.gif' data-file='Yes_yes_he_had.gif'>Yes_yes_he_had</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_hadnt.gif' data-file='No_no_he_hadnt.gif'>No_no_he_hadnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_can.gif' data-file='Yes_yes_he_can.gif'>Yes_yes_he_can</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_cant.gif' data-file='No_no_he_cant.gif'>No_no_he_cant</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_could.gif' data-file='Yes_yes_he_could.gif'>Yes_yes_he_could</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_couldnt.gif' data-file='No_no_he_couldnt.gif'>No_no_he_couldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_will.gif' data-file='Yes_yes_he_will.gif'>Yes_yes_he_will</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_wont.gif' data-file='No_no_he_wont.gif'>No_no_he_wont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_would.gif' data-file='Yes_yes_he_would.gif'>Yes_yes_he_would</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_wouldnt.gif' data-file='No_no_he_wouldnt.gif'>No_no_he_wouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_should.gif' data-file='Yes_yes_he_should.gif'>Yes_yes_he_should</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_shouldnt.gif' data-file='No_no_he_shouldnt.gif'>No_no_he_shouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_must.gif' data-file='Yes_yes_he_must.gif'>Yes_yes_he_must</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_mustnt.gif' data-file='No_no_he_mustnt.gif'>No_no_he_mustnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_might.gif' data-file='Yes_yes_he_might.gif'>Yes_yes_he_might</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_might_not.gif' data-file='No_no_he_might_not.gif'>No_no_he_might_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_he_may.gif' data-file='Yes_yes_he_may.gif'>Yes_yes_he_may</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_he_may_not.gif' data-file='No_no_he_may_not.gif'>No_no_he_may_not</a>
 </div>
 <div class='jump'><a href='#top'>Jump to Top</a></div>
 </section>
-<section id='she'>
-<h2>She</h2>
-<div class='pairgrid'>
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_is.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_is.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_isnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_isnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_was.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_was.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_wasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_wasnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_does.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_does.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_doesnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_doesnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_did.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_didnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_has.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_has.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_hasnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_hasnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_had.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_hadnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_can.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_cant.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_could.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_couldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_will.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_wont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_would.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_wouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_should.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_shouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_must.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_mustnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_might.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_might_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_she_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_she_may.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_she_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_she_may_not.gif">
+<section id='she'><h2>She</h2>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_is.gif' data-file='Yes_yes_she_is.gif'>Yes_yes_she_is</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_isnt.gif' data-file='No_no_she_isnt.gif'>No_no_she_isnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_was.gif' data-file='Yes_yes_she_was.gif'>Yes_yes_she_was</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_wasnt.gif' data-file='No_no_she_wasnt.gif'>No_no_she_wasnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_does.gif' data-file='Yes_yes_she_does.gif'>Yes_yes_she_does</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_doesnt.gif' data-file='No_no_she_doesnt.gif'>No_no_she_doesnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_did.gif' data-file='Yes_yes_she_did.gif'>Yes_yes_she_did</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_didnt.gif' data-file='No_no_she_didnt.gif'>No_no_she_didnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_has.gif' data-file='Yes_yes_she_has.gif'>Yes_yes_she_has</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_hasnt.gif' data-file='No_no_she_hasnt.gif'>No_no_she_hasnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_had.gif' data-file='Yes_yes_she_had.gif'>Yes_yes_she_had</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_hadnt.gif' data-file='No_no_she_hadnt.gif'>No_no_she_hadnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_can.gif' data-file='Yes_yes_she_can.gif'>Yes_yes_she_can</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_cant.gif' data-file='No_no_she_cant.gif'>No_no_she_cant</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_could.gif' data-file='Yes_yes_she_could.gif'>Yes_yes_she_could</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_couldnt.gif' data-file='No_no_she_couldnt.gif'>No_no_she_couldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_will.gif' data-file='Yes_yes_she_will.gif'>Yes_yes_she_will</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_wont.gif' data-file='No_no_she_wont.gif'>No_no_she_wont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_would.gif' data-file='Yes_yes_she_would.gif'>Yes_yes_she_would</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_wouldnt.gif' data-file='No_no_she_wouldnt.gif'>No_no_she_wouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_should.gif' data-file='Yes_yes_she_should.gif'>Yes_yes_she_should</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_shouldnt.gif' data-file='No_no_she_shouldnt.gif'>No_no_she_shouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_must.gif' data-file='Yes_yes_she_must.gif'>Yes_yes_she_must</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_mustnt.gif' data-file='No_no_she_mustnt.gif'>No_no_she_mustnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_might.gif' data-file='Yes_yes_she_might.gif'>Yes_yes_she_might</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_might_not.gif' data-file='No_no_she_might_not.gif'>No_no_she_might_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_she_may.gif' data-file='Yes_yes_she_may.gif'>Yes_yes_she_may</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_she_may_not.gif' data-file='No_no_she_may_not.gif'>No_no_she_may_not</a>
 </div>
 <div class='jump'><a href='#top'>Jump to Top</a></div>
 </section>
-<section id='we'>
-<h2>We</h2>
-<div class='pairgrid'>
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_are.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_are.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_arent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_arent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_were.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_were.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_werent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_werent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_do.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_dont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_did.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_didnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_have.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_havent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_had.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_hadnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_can.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_cant.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_could.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_couldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_will.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_wont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_would.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_wouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_shall.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_shall.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_shall_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_shall_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_should.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_shouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_must.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_mustnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_might.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_might_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_we_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_we_may.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_we_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_we_may_not.gif">
+<section id='we'><h2>We</h2>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_are.gif' data-file='Yes_yes_we_are.gif'>Yes_yes_we_are</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_arent.gif' data-file='No_no_we_arent.gif'>No_no_we_arent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_were.gif' data-file='Yes_yes_we_were.gif'>Yes_yes_we_were</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_werent.gif' data-file='No_no_we_werent.gif'>No_no_we_werent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_do.gif' data-file='Yes_yes_we_do.gif'>Yes_yes_we_do</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_dont.gif' data-file='No_no_we_dont.gif'>No_no_we_dont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_did.gif' data-file='Yes_yes_we_did.gif'>Yes_yes_we_did</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_didnt.gif' data-file='No_no_we_didnt.gif'>No_no_we_didnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_have.gif' data-file='Yes_yes_we_have.gif'>Yes_yes_we_have</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_havent.gif' data-file='No_no_we_havent.gif'>No_no_we_havent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_had.gif' data-file='Yes_yes_we_had.gif'>Yes_yes_we_had</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_hadnt.gif' data-file='No_no_we_hadnt.gif'>No_no_we_hadnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_can.gif' data-file='Yes_yes_we_can.gif'>Yes_yes_we_can</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_cant.gif' data-file='No_no_we_cant.gif'>No_no_we_cant</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_could.gif' data-file='Yes_yes_we_could.gif'>Yes_yes_we_could</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_couldnt.gif' data-file='No_no_we_couldnt.gif'>No_no_we_couldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_will.gif' data-file='Yes_yes_we_will.gif'>Yes_yes_we_will</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_wont.gif' data-file='No_no_we_wont.gif'>No_no_we_wont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_would.gif' data-file='Yes_yes_we_would.gif'>Yes_yes_we_would</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_wouldnt.gif' data-file='No_no_we_wouldnt.gif'>No_no_we_wouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_shall.gif' data-file='Yes_yes_we_shall.gif'>Yes_yes_we_shall</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_shall_not.gif' data-file='No_no_we_shall_not.gif'>No_no_we_shall_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_should.gif' data-file='Yes_yes_we_should.gif'>Yes_yes_we_should</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_shouldnt.gif' data-file='No_no_we_shouldnt.gif'>No_no_we_shouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_must.gif' data-file='Yes_yes_we_must.gif'>Yes_yes_we_must</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_mustnt.gif' data-file='No_no_we_mustnt.gif'>No_no_we_mustnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_might.gif' data-file='Yes_yes_we_might.gif'>Yes_yes_we_might</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_might_not.gif' data-file='No_no_we_might_not.gif'>No_no_we_might_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_we_may.gif' data-file='Yes_yes_we_may.gif'>Yes_yes_we_may</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_we_may_not.gif' data-file='No_no_we_may_not.gif'>No_no_we_may_not</a>
 </div>
 <div class='jump'><a href='#top'>Jump to Top</a></div>
 </section>
-<section id='they'>
-<h2>They</h2>
-<div class='pairgrid'>
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_are.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_are.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_arent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_arent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_were.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_were.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_werent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_werent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_do.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_do.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_dont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_dont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_did.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_did.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_didnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_didnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_have.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_have.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_havent.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_havent.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_had.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_had.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_hadnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_hadnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_can.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_can.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_cant.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_cant.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_could.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_could.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_couldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_couldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_will.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_will.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_wont.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_wont.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_would.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_would.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_wouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_wouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_should.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_should.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_shouldnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_shouldnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_must.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_must.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_mustnt.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_mustnt.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_might.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_might.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_might_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_might_not.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/Yes_yes_they_may.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="Yes_yes_they_may.gif">
-<img class="gif lazygif" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="images/No_no_they_may_not.gif" loading="lazy" decoding="async" fetchpriority="low" width="256" height="256" alt="No_no_they_may_not.gif">
+<section id='they'><h2>They</h2>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_are.gif' data-file='Yes_yes_they_are.gif'>Yes_yes_they_are</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_arent.gif' data-file='No_no_they_arent.gif'>No_no_they_arent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_were.gif' data-file='Yes_yes_they_were.gif'>Yes_yes_they_were</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_werent.gif' data-file='No_no_they_werent.gif'>No_no_they_werent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_do.gif' data-file='Yes_yes_they_do.gif'>Yes_yes_they_do</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_dont.gif' data-file='No_no_they_dont.gif'>No_no_they_dont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_did.gif' data-file='Yes_yes_they_did.gif'>Yes_yes_they_did</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_didnt.gif' data-file='No_no_they_didnt.gif'>No_no_they_didnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_have.gif' data-file='Yes_yes_they_have.gif'>Yes_yes_they_have</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_havent.gif' data-file='No_no_they_havent.gif'>No_no_they_havent</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_had.gif' data-file='Yes_yes_they_had.gif'>Yes_yes_they_had</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_hadnt.gif' data-file='No_no_they_hadnt.gif'>No_no_they_hadnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_can.gif' data-file='Yes_yes_they_can.gif'>Yes_yes_they_can</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_cant.gif' data-file='No_no_they_cant.gif'>No_no_they_cant</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_could.gif' data-file='Yes_yes_they_could.gif'>Yes_yes_they_could</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_couldnt.gif' data-file='No_no_they_couldnt.gif'>No_no_they_couldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_will.gif' data-file='Yes_yes_they_will.gif'>Yes_yes_they_will</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_wont.gif' data-file='No_no_they_wont.gif'>No_no_they_wont</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_would.gif' data-file='Yes_yes_they_would.gif'>Yes_yes_they_would</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_wouldnt.gif' data-file='No_no_they_wouldnt.gif'>No_no_they_wouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_should.gif' data-file='Yes_yes_they_should.gif'>Yes_yes_they_should</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_shouldnt.gif' data-file='No_no_they_shouldnt.gif'>No_no_they_shouldnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_must.gif' data-file='Yes_yes_they_must.gif'>Yes_yes_they_must</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_mustnt.gif' data-file='No_no_they_mustnt.gif'>No_no_they_mustnt</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_might.gif' data-file='Yes_yes_they_might.gif'>Yes_yes_they_might</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_might_not.gif' data-file='No_no_they_might_not.gif'>No_no_they_might_not</a>
+</div>
+<div class='pair'>
+<a class='yes' href='#gif=Yes_yes_they_may.gif' data-file='Yes_yes_they_may.gif'>Yes_yes_they_may</a>
+<div class='spacer'></div>
+<a class='no' href='#gif=No_no_they_may_not.gif' data-file='No_no_they_may_not.gif'>No_no_they_may_not</a>
 </div>
 <div class='jump'><a href='#top'>Jump to Top</a></div>
 </section>
 </main>
 <script>
 (() => {
-  const PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-  const imgs = Array.from(document.querySelectorAll('img.lazygif[data-src]'));
+  const gifs = ["Yes_yes_I_am.gif", "No_no_Im_not.gif", "Yes_yes_I_was.gif", "No_no_I_wasnt.gif", "Yes_yes_I_do.gif", "No_no_I_dont.gif", "Yes_yes_I_did.gif", "No_no_I_didnt.gif", "Yes_yes_I_have.gif", "No_no_I_havent.gif", "Yes_yes_I_had.gif", "No_no_I_hadnt.gif", "Yes_yes_I_can.gif", "No_no_I_cant.gif", "Yes_yes_I_could.gif", "No_no_I_couldnt.gif", "Yes_yes_I_will.gif", "No_no_I_wont.gif", "Yes_yes_I_would.gif", "No_no_I_wouldnt.gif", "Yes_yes_I_shall.gif", "No_no_I_shall_not.gif", "Yes_yes_I_should.gif", "No_no_I_shouldnt.gif", "Yes_yes_I_must.gif", "No_no_I_mustnt.gif", "Yes_yes_I_might.gif", "No_no_I_might_not.gif", "Yes_yes_I_may.gif", "No_no_I_may_not.gif", "Yes_yes_you_are.gif", "No_no_you_arent.gif", "Yes_yes_you_were.gif", "No_no_you_werent.gif", "Yes_yes_you_do.gif", "No_no_you_dont.gif", "Yes_yes_you_did.gif", "No_no_you_didnt.gif", "Yes_yes_you_have.gif", "No_no_you_havent.gif", "Yes_yes_you_had.gif", "No_no_you_hadnt.gif", "Yes_yes_you_can.gif", "No_no_you_cant.gif", "Yes_yes_you_could.gif", "No_no_you_couldnt.gif", "Yes_yes_you_will.gif", "No_no_you_wont.gif", "Yes_yes_you_would.gif", "No_no_you_wouldnt.gif", "Yes_yes_you_shall.gif", "No_no_you_shall_not.gif", "Yes_yes_you_should.gif", "No_no_you_shouldnt.gif", "Yes_yes_you_must.gif", "No_no_you_mustnt.gif", "Yes_yes_you_might.gif", "No_no_you_might_not.gif", "Yes_yes_you_may.gif", "No_no_you_may_not.gif", "Yes_yes_he_is.gif", "No_no_he_isnt.gif", "Yes_yes_he_was.gif", "No_no_he_wasnt.gif", "Yes_yes_he_does.gif", "No_no_he_doesnt.gif", "Yes_yes_he_did.gif", "No_no_he_didnt.gif", "Yes_yes_he_has.gif", "No_no_he_hasnt.gif", "Yes_yes_he_had.gif", "No_no_he_hadnt.gif", "Yes_yes_he_can.gif", "No_no_he_cant.gif", "Yes_yes_he_could.gif", "No_no_he_couldnt.gif", "Yes_yes_he_will.gif", "No_no_he_wont.gif", "Yes_yes_he_would.gif", "No_no_he_wouldnt.gif", "Yes_yes_he_should.gif", "No_no_he_shouldnt.gif", "Yes_yes_he_must.gif", "No_no_he_mustnt.gif", "Yes_yes_he_might.gif", "No_no_he_might_not.gif", "Yes_yes_he_may.gif", "No_no_he_may_not.gif", "Yes_yes_she_is.gif", "No_no_she_isnt.gif", "Yes_yes_she_was.gif", "No_no_she_wasnt.gif", "Yes_yes_she_does.gif", "No_no_she_doesnt.gif", "Yes_yes_she_did.gif", "No_no_she_didnt.gif", "Yes_yes_she_has.gif", "No_no_she_hasnt.gif", "Yes_yes_she_had.gif", "No_no_she_hadnt.gif", "Yes_yes_she_can.gif", "No_no_she_cant.gif", "Yes_yes_she_could.gif", "No_no_she_couldnt.gif", "Yes_yes_she_will.gif", "No_no_she_wont.gif", "Yes_yes_she_would.gif", "No_no_she_wouldnt.gif", "Yes_yes_she_should.gif", "No_no_she_shouldnt.gif", "Yes_yes_she_must.gif", "No_no_she_mustnt.gif", "Yes_yes_she_might.gif", "No_no_she_might_not.gif", "Yes_yes_she_may.gif", "No_no_she_may_not.gif", "Yes_yes_we_are.gif", "No_no_we_arent.gif", "Yes_yes_we_were.gif", "No_no_we_werent.gif", "Yes_yes_we_do.gif", "No_no_we_dont.gif", "Yes_yes_we_did.gif", "No_no_we_didnt.gif", "Yes_yes_we_have.gif", "No_no_we_havent.gif", "Yes_yes_we_had.gif", "No_no_we_hadnt.gif", "Yes_yes_we_can.gif", "No_no_we_cant.gif", "Yes_yes_we_could.gif", "No_no_we_couldnt.gif", "Yes_yes_we_will.gif", "No_no_we_wont.gif", "Yes_yes_we_would.gif", "No_no_we_wouldnt.gif", "Yes_yes_we_shall.gif", "No_no_we_shall_not.gif", "Yes_yes_we_should.gif", "No_no_we_shouldnt.gif", "Yes_yes_we_must.gif", "No_no_we_mustnt.gif", "Yes_yes_we_might.gif", "No_no_we_might_not.gif", "Yes_yes_we_may.gif", "No_no_we_may_not.gif", "Yes_yes_they_are.gif", "No_no_they_arent.gif", "Yes_yes_they_were.gif", "No_no_they_werent.gif", "Yes_yes_they_do.gif", "No_no_they_dont.gif", "Yes_yes_they_did.gif", "No_no_they_didnt.gif", "Yes_yes_they_have.gif", "No_no_they_havent.gif", "Yes_yes_they_had.gif", "No_no_they_hadnt.gif", "Yes_yes_they_can.gif", "No_no_they_cant.gif", "Yes_yes_they_could.gif", "No_no_they_couldnt.gif", "Yes_yes_they_will.gif", "No_no_they_wont.gif", "Yes_yes_they_would.gif", "No_no_they_wouldnt.gif", "Yes_yes_they_should.gif", "No_no_they_shouldnt.gif", "Yes_yes_they_must.gif", "No_no_they_mustnt.gif", "Yes_yes_they_might.gif", "No_no_they_might_not.gif", "Yes_yes_they_may.gif", "No_no_they_may_not.gif"];
+  const listEl = document.getElementById('list');
+  const viewerEl = document.getElementById('viewer');
+  const imgEl = document.getElementById('viewerImg');
+  const titleEl = document.getElementById('viewerTitle');
 
-  const load = (img) => {
-    const src = img.getAttribute('data-src');
-    if (!src) return;
-    if (img.dataset.state === 'loaded') return;
-    img.dataset.state = 'loaded';
-    img.src = src;
-    img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
-  };
+  const prevLink = document.getElementById('prevLink');
+  const nextLink = document.getElementById('nextLink');
+  const backLink = document.getElementById('backLink');
 
-  // Always start from placeholder to prevent early fetches.
-  imgs.forEach(img => {
-    img.dataset.state = 'idle';
-    if (!img.getAttribute('src')) img.setAttribute('src', PLACEHOLDER);
-  });
+  let lastListHash = '';
 
-  if (!('IntersectionObserver' in window)) {
-    imgs.forEach(load);
-    return;
+  function showList() {
+    viewerEl.style.display = 'none';
+    listEl.style.display = 'block';
   }
 
-  // Load when approaching viewport; no unload (avoids layout/anchor weirdness).
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        load(e.target);
-        io.unobserve(e.target);
-      }
-    }
-  }, { root: null, rootMargin: '800px 0px', threshold: 0.01 });
+  function showViewer() {
+    listEl.style.display = 'none';
+    viewerEl.style.display = 'block';
+  }
 
-  imgs.forEach(img => io.observe(img));
+  function setHashToFile(file) {
+    location.hash = 'gif=' + encodeURIComponent(file);
+  }
+
+  function renderViewer(idx) {
+    const file = gifs[idx];
+    titleEl.textContent = file;
+    imgEl.src = 'images/' + file; // direct GIF => long-press saves GIF
+    showViewer();
+
+    prevLink.onclick = (e) => {
+      e.preventDefault();
+      const j = (idx - 1 + gifs.length) % gifs.length;
+      setHashToFile(gifs[j]);
+    };
+    nextLink.onclick = (e) => {
+      e.preventDefault();
+      const j = (idx + 1) % gifs.length;
+      setHashToFile(gifs[j]);
+    };
+    backLink.onclick = (e) => {
+      e.preventDefault();
+      location.hash = lastListHash ? ('#' + lastListHash) : '';
+      if (!location.hash) showList();
+    };
+  }
+
+  function handleHash() {
+    const raw = location.hash || '';
+    const h = raw.startsWith('#') ? raw.slice(1) : raw;
+
+    if (!h) {
+      showList();
+      return;
+    }
+
+    if (h.startsWith('gif=')) {
+      const fileEnc = h.slice(4);
+      const file = decodeURIComponent(fileEnc);
+      const idx = gifs.indexOf(file);
+      if (idx >= 0) renderViewer(idx);
+      return;
+    }
+
+    // Section anchor; remember for Back.
+    lastListHash = h;
+    showList();
+  }
+
+  // Before entering viewer, capture the current section for Back.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-file]');
+    if (!a) return;
+    const sec = a.closest('section');
+    lastListHash = (sec && sec.id) ? sec.id : '';
+  });
+
+  window.addEventListener('hashchange', handleHash);
+  window.addEventListener('load', handleHash);
 })();
 </script>
 </body></html>
