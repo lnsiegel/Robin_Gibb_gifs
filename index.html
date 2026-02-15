@@ -792,10 +792,15 @@ window.addEventListener('resize', updateHeaderHeightVarSoon);
       const j = (idx + 1) % gifs.length;
       setHashToFile(gifs[j]);
     };
+//     backLink.onclick = (e) => {
+//       e.preventDefault();
+//       location.hash = lastListHash ? ('#' + lastListHash) : '';
+//       if (!location.hash) showList();
+//     };
     backLink.onclick = (e) => {
       e.preventDefault();
-      location.hash = lastListHash ? ('#' + lastListHash) : '';
-      if (!location.hash) showList();
+      if (history.length > 1) history.back();
+      else { location.hash = ''; showList(); }
     };
   }
 
